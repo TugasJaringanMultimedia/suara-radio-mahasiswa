@@ -1,17 +1,15 @@
-# models.py
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class RekamanSiaran(db.Model):
-    __tablename__ = 'rekaman_siaran'
-
+class Broadcast(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    judul = db.Column(db.String(100), nullable=False)
-    tanggal = db.Column(db.String(20), nullable=False)
-    waktu_mulai = db.Column(db.String(20), nullable=False)
-    waktu_berakhir = db.Column(db.String(20), nullable=False)
-    nama_file = db.Column(db.String(150), nullable=False)
+    title = db.Column(db.String(150), nullable=False)
+    broadcast_date = db.Column(db.String(20), nullable=False)
+    start_time = db.Column(db.String(20), nullable=False)
+    end_time = db.Column(db.String(20), nullable=True) # Waktu berakhir bisa diisi saat siaran selesai
+    filename = db.Column(db.String(100), unique=True, nullable=False)
+    is_live = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f'<Rekaman {self.judul} - {self.tanggal}>'
+        return f'<Broadcast {self.title}>'
